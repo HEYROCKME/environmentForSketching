@@ -14,10 +14,10 @@ const pi = Math.PI;
 
 const sketch = () => {
   return ({ context, width, height }) => {
-    context.fillStyle = "white";
+    context.fillStyle = "salmon";
     context.fillRect(0, 0, width, height);
 
-    context.fillStyle = "black";
+    context.fillStyle = "white";
     console.log(width * 0.5);
     const cx = width * 0.5;
     const cy = height * 0.5;
@@ -25,7 +25,7 @@ const sketch = () => {
     const h = height * 0.1;
     let x, y;
 
-    const num = 12;
+    const num = 12 + Math.random() * 12;
     const radius = width * 0.3;
 
     for (let i = 0; i < num; i++) {
@@ -38,18 +38,25 @@ const sketch = () => {
       context.save();
       context.translate(x, y);
       context.rotate(-angle);
-      context.scale(random.range(3, 1), 1);
+      context.lineWidth = random.range(5, 20);
+      context.scale(random.range(0.1, 1), random.range(0.2, 0.5));
       context.beginPath();
-      context.rect(-w * 0.5, -h * 0.5, w, h);
+      context.rect(-w * 0.5, random.range(2, -h * 0.5), w, h);
       context.fill();
       context.restore();
 
       context.save();
       context.translate(cx, cy);
       context.rotate(angle);
-      context.lineWidth = 20;
+      context.lineWidth = random.range(5, 20);
       context.beginPath();
-      context.arc(0, 0, radius, slice * -0.3, slice * 0.3);
+      context.arc(
+        0,
+        0,
+        radius * random.range(0.7, 1.3),
+        slice * random.range(0, -0.9),
+        slice * random.range(1, 0.5)
+      );
       context.stroke();
       context.restore();
     }
